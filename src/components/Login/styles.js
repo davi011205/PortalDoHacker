@@ -38,3 +38,10 @@ export const Form = styled.form`
   text-align: center;
   margin: 1vh auto;
 `
+
+export const footer = styled.footer`
+  background: grey;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+`;
