@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const h2 = styled.h2`
   padding-top: 5vh;
   color: white;
+  font-size: 2.5rem;
 `;
 
 export const div = styled.div`
@@ -17,8 +18,9 @@ export const div = styled.div`
 `;
 export const Button = styled.button`
   outline: none;
-  font-size: 18px;
-  padding: 14px 18px;
+ 
+  padding: 5px 10px;
+  border-radius: 10px;
   cursor: pointer;
 `;
 
@@ -29,3 +31,10 @@ export const Image = styled.img`
   margin: 5vh auto;
 `;
 
+export const Form = styled.form`
+  padding: 5px;
+  background: grey;
+  width: 25vw;
+  text-align: center;
+  margin: 1vh auto;
+`

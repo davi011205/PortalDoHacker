@@ -30,13 +30,13 @@ const ChatFooter = ({ chatId }) => {
           onChange={(e) => setMessage(e.target.value)}
           value={message}
         />
-        <C.InputFile 
+        {/* <C.InputFile 
           type="file"
           accept=".noaccess, .no-access, .narsw, .nalok, .jigsaw, .png"
           size={256 *1024}
           onChange={(e) => setMessage(e.target.value)}
           value={message}
-        />
+        /> */}
         <MdSend onClick={handleSendMessage} />
       </C.Form>
     </C.Container>
