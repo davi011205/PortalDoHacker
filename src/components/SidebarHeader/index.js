@@ -42,7 +42,10 @@ const SidebarHeader = ({ setUserChat }) => {
         onClick={() => [auth.signOut(), setUserChat(null)]}
       />
       <C.Options>
-        <BiUserPlus onClick={handleCreateChat} />
+        {/* Só exibir o ícone BiUserPlus se o email e a empresa não forem "daviemail@gmail.com" e "daviempresa" */}
+        {(user.email === "daviemail@gmail.com" && user.empresa === "daviempresa") && (
+          <BiUserPlus onClick={handleCreateChat} />
+        )}
       </C.Options>
     </C.Container>
   );
