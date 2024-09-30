@@ -14,11 +14,13 @@ const SidebarChatsItem = ({ id, users, user, setUserChat, active }) => {
 
   const Avatar = getUserItem?.docs?.[0]?.data();
   const item = getUser(users, user);
+  const nome = Avatar?.nome;
+  console.log(Avatar?.nome)
 
   const handleNewChat = () => {
     const userChat = {
       chatId: id,
-      name: item.split("@")[0],
+      name: nome,
       photoURL: Avatar?.photoURL,
     };
 
@@ -28,7 +30,7 @@ const SidebarChatsItem = ({ id, users, user, setUserChat, active }) => {
   return (
     <C.Container onClick={handleNewChat} className={active}>
       {Avatar ? <C.Avatar src={Avatar?.photoURL} /> : <MdPerson />}
-      <C.Name>{item.split("@")[0]}</C.Name>
+      <C.Name>{nome}</C.Name>
     </C.Container>
   );
 };

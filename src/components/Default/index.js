@@ -10,12 +10,7 @@ const Default = () => {
       <C.Title>Suporte Hacker</C.Title>
       <C.Info>
         Aqui Você vai poder negociar, pagar e ter maiores detalhes.
-        Você também poderá submeter um arquivo comprometido para descriptografia, como amostra do nosso controle sobre os dados.
-        <br></br>
-        <br></br>
-        
-          clique no ícone <BiUserPlus style={{height:'18px', width:'auto', margin:'0 1vw 0 1vw'}}/> e digite hacker
-        
+        Você também poderá submeter um arquivo comprometido para descriptografia, como amostra do nosso controle sobre os dados.        
       </C.Info>
     </C.Container>
   );
