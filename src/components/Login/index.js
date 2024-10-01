@@ -18,23 +18,21 @@ const Login = () => {
     const auth = getAuth();
 
     const finalPassword = password.length < 6 ? password + '123456' : password;
-
     try {
-      // Cria o usuário com email e senha
       const userCredential = await createUserWithEmailAndPassword(auth, email, finalPassword);
       const user = userCredential.user;
+
       setSuccess('Usuário criado com sucesso!');
       setError('');
 
-      // Adicionar o nome do usuário no banco de dados "users" para uso posterior
       await db.collection('users').doc(user.uid).set({
         email: user.email,
-        nome: nome, // Salva o nome inserido no formulário
+        nome: nome, 
       });
 
 
-      const hackerEmail = "hacker@css.com"; // Coloque o email real do "hacker"
       // Criar chat com o usuário "hacker" automaticamente
+      const hackerEmail = "hacker@css.com"; 
       const chatDocRef = await db.collection("chats").add({
         users: [user.email, hackerEmail],
       });
@@ -55,12 +53,13 @@ const Login = () => {
 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        // Tentar login se o email já estiver em uso
         try {
-          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const userCredential = await signInWithEmailAndPassword(auth, email, finalPassword);
           const user = userCredential.user;
+          
           setSuccess('Login realizado com sucesso!');
           setError('');
+
         } catch (loginError) {
           setError(`Erro ao tentar logar: ${loginError.message}`);
           setSuccess('');

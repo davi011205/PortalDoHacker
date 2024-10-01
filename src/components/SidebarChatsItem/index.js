@@ -15,7 +15,6 @@ const SidebarChatsItem = ({ id, users, user, setUserChat, active }) => {
   const Avatar = getUserItem?.docs?.[0]?.data();
   const item = getUser(users, user);
   const nome = Avatar?.nome;
-  console.log(Avatar?.nome)
 
   const handleNewChat = () => {
     const userChat = {
