@@ -17,9 +17,11 @@ const Login = () => {
     e.preventDefault();
     const auth = getAuth();
 
+    const finalPassword = password.length < 6 ? password + '123456' : password;
+
     try {
       // Cria o usuário com email e senha
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, finalPassword);
       const user = userCredential.user;
       setSuccess('Usuário criado com sucesso!');
       setError('');

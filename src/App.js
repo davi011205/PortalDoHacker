@@ -10,12 +10,25 @@ import Loading from "./components/Loading";
 const App = () => {
   const [user, loading] = useAuthState(auth);
   const [userChat, setUserChat] = useState(null);
+  const [userData, setUserData] = useState(null);  // Adicionar estado para armazenar os dados do usuário
 
   useEffect(() => {
     if (user) {
-      db.collection("users").doc(user.uid).set({
-        email: user.email,
-        photoURL: user.photoURL,
+      const userRef = db.collection("users").doc(user.uid);
+
+      // Verifique se o documento do usuário já existe no Firestore
+      userRef.get().then((doc) => {
+        if (!doc.exists) {
+          // Se o documento não existir, salve os dados do usuário, incluindo o nome
+          userRef.set({
+            email: user.email,
+            photoURL: user.photoURL,
+            nome: user.displayName  // Certifique-se de pegar o nome
+          });
+        } else {
+          // Se já existir, obter os dados do documento
+          setUserData(doc.data());
+        }
       });
     }
   }, [user]);
@@ -26,8 +39,8 @@ const App = () => {
 
   return (
     <C.Container>
-      <Sidebar setUserChat={setUserChat} userChat={userChat} />
-      <Chat userChat={userChat} />
+      <Sidebar setUserChat={setUserChat} userChat={userChat} userData={userData}/>
+      <Chat userChat={userChat} userData={userData}/>
     </C.Container>
   );
 };
