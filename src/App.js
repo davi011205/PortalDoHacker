@@ -15,7 +15,6 @@ const App = () => {
   useEffect(() => {
     if (user) {
       const userRef = db.collection("users").doc(user.uid);
-
       // Verifique se o documento do usuário já existe no Firestore
       userRef.get().then((doc) => {
         if (!doc.exists) {
@@ -23,7 +22,7 @@ const App = () => {
           userRef.set({
             email: user.email,
             photoURL: user.photoURL,
-            nome: user.displayName  // Certifique-se de pegar o nome
+            nome: user.displayName, 
           });
         } else {
           // Se já existir, obter os dados do documento

@@ -1,10 +1,11 @@
 import React from "react";
 import * as C from "./styles";
-import { MdDonutLarge, MdChat, MdMoreVert, MdMore, MdPlusOne } from "react-icons/md";
 import { auth, db } from "../../services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { BiUserPlus } from "react-icons/bi";
+import { BiExit } from "react-icons/bi";
+import fotoJigsaw from "../../styles/fundo-inicial.jpg"
+import { MdPerson } from "react-icons/md";
 
 const SidebarHeader = ({ setUserChat }) => {
   const [user] = useAuthState(auth);
@@ -37,15 +38,14 @@ const SidebarHeader = ({ setUserChat }) => {
 
   return (
     <C.Container>
-      <C.Avatar
-        src={user?.photoURL}
-        onClick={() => [auth.signOut(), setUserChat(null)]}
-      />
+      {user?.email === 'hacker@css.com' ? (
+        <C.Avatar src={fotoJigsaw} />
+        ) : (
+          <MdPerson />
+        )
+      }
       <C.Options>
-        {/* Só exibir o ícone BiUserPlus se o email e a empresa não forem "daviemail@gmail.com" e "daviempresa" */}
-        {(user.email === "daviemail@gmail.com" && user.empresa === "daviempresa") && (
-          <BiUserPlus onClick={handleCreateChat} />
-        )}
+            <BiExit onClick={() => [auth.signOut(), setUserChat(null)]}></BiExit>
       </C.Options>
     </C.Container>
   );

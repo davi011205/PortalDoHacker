@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
   background: black;
 `;
@@ -18,17 +18,10 @@ export const div = styled.div`
 `;
 export const Button = styled.button`
   outline: none;
- 
-  padding: 5px 10px;
+  padding: 15px 20px;
   border-radius: 10px;
   cursor: pointer;
-`;
-
-export const Image = styled.img`
-  width: auto;
-  height: 40vh;
-  display: block;
-  margin: 5vh auto;
+  border-top: 50px; 
 `;
 
 export const Form = styled.form`
@@ -76,7 +69,35 @@ export const divModalContent = styled.div`
 export const a = styled.a`
     color: red;
 `;
+
 export const span = styled.span`
     color: red;
 `;
 
+export const jigsaw = styled.img`
+  width: auto;
+  height: 40vh;
+  display: block;
+  margin: 0  auto 1vh auto;
+`;
+
+export const p = styled.p`
+  max-width: 70vw;
+  margin: 0 auto 1vh auto;
+  font-size: 1.2rem;
+`;
+
+export const spanJigsaw = styled.span`
+    color: blac;
+    animation: bg 10s forwards;
+    font-size: 2.5rem;
+    font-weight: bold;
+
+    @keyframes bg {
+     
+      100% {
+        color: red;
+      }
+    
+    }
+`;

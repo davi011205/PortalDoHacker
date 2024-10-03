@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { db, storage } from "../../services/firebase";
 import * as C from "./styles";
+import fotoJigsaw from '../../styles/fundo-inicial.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -77,18 +78,19 @@ const Login = () => {
 
   return (
     <C.Container>
-      <C.h2>Seja bem-vindo, este é o canal de suporte do grupo JIGSAW!</C.h2>
+      <C.h2>Canal de suporte do grupo  </C.h2>
+      <C.spanJigsaw>JIGSAW!</C.spanJigsaw>
+      <C.jigsaw src={fotoJigsaw}></C.jigsaw>
       <C.div>
-        Seus sistemas e arquivos foram comprometidos? Sua empresa está inoperante? Aqui conseguiremos te ajudar!
-        <br />
-        Se chegou até aqui, você já deve saber o que está acontecendo. Mas caso não saiba, temos  um breve resumo para que você se situe sobre o que é um <C.a href="https://www.kaspersky.com.br/resource-center/threats/ransomware">RANSOMWARE</C.a>.
-        <br />
-        Só nós sabemos como descriptografar seus arquivos e voltar o funcionamento correto da sua empresa. Entre em contato com nosso suporte para informações sobre negociações, pagamento, garantia de devolução dos dados e maiores detalhes.
-        Você também poderá submeter um arquivo comprometido para descriptografia, como amostra do nosso controle sobre os dados. <br></br>
-        <br></br>Extensões permitidas: .noaccess <C.span>/</C.span> .no-access <C.span>/</C.span> .narsw <C.span>/</C.span> .nalok <C.span>/</C.span> .jigsaw
-        <br></br>Tamanho máximo da amostra: <C.span>256kbps</C.span>
-        <br></br>
-        <br></br>
+        <C.p>
+          Seus sistemas e arquivos foram comprometidos? Sua empresa está inoperante? Aqui conseguiremos te ajudar!
+          <br />
+          Se chegou até aqui, você já deve saber o que está acontecendo. Mas caso não saiba, temos  um breve resumo para que você se situe sobre o que é um <C.a href="https://www.kaspersky.com.br/resource-center/threats/ransomware">RANSOMWARE</C.a>.
+          <br />
+          Só nós sabemos como descriptografar seus arquivos e voltar o funcionamento correto da sua empresa. Entre em contato com nosso suporte para informações sobre negociações, pagamento, garantia de devolução dos dados e maiores detalhes.
+          Você também poderá submeter um arquivo comprometido para descriptografia, como amostra do nosso controle sobre os dados. <br></br>
+        </C.p>
+        
         <C.Button onClick={toggleFormFileVisibility} id="openModal">Enviar amostra</C.Button>
         <C.Button onClick={toggleFormVisibility}>Chat com o suporte</C.Button>
 
@@ -99,7 +101,7 @@ const Login = () => {
                 <C.Form onSubmit={handleSignup}>
                 <h2 style={{display: 'inline'}}>Trial Decrypt </h2>
                 <C.spanClose onClick={toggleFormFileVisibility}>×</C.spanClose>     
-                    <div>
+                  <div>
                     <label>Nome:</label>
                     <input
                       type="text"
@@ -133,7 +135,12 @@ const Login = () => {
                       onChange={(e) => setFile(e.target.files[0])}
                       required
                     />
+                    <br></br>
+                    <br></br>
+                    Extensões permitidas: .noaccess <C.span>/</C.span> .no-access <C.span>/</C.span> .narsw <C.span>/</C.span> .nalok <C.span>/</C.span> .jigsaw
+                    <br></br>Tamanho máximo da amostra: <C.span>256kbps</C.span>
                   </div>
+                  <br></br>
                   <C.Button onClick={handleSignup}>Enviar</C.Button>
                 </C.Form>
             </C.divModal>

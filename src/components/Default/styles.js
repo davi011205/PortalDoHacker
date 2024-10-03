@@ -20,6 +20,14 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
+  margin-bottom: -2vh;
+  padding: 0;
+`;
+export const subTitle = styled.h1`
+  text-align: center;
+  font-size: 1rem;
+  padding: 0;
+
 `;
 
 export const Info = styled.span`

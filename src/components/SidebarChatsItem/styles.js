@@ -9,10 +9,6 @@ export const Container = styled.div`
   background-color: black;
   color: white;
 
-  &:hover {
-    background-color: grey;
-    color: black;
-  }
 
   svg {
     width: 30px;
@@ -23,10 +19,7 @@ export const Container = styled.div`
     min-width: fit-content;
   }
 
-  &.active {
-    background-color: grey;
-    color: white;
-  }
+ 
 `;
 
 export const Name = styled.span`
@@ -36,7 +29,7 @@ export const Name = styled.span`
 `;
 
 export const Avatar = styled.img`
-  width: 30px;
+  width: auto;
   height: 30px;
   border-radius: 50%;
   margin-right: 10px;
