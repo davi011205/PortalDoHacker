@@ -8,12 +8,13 @@ import firebase from "firebase/compat/app";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nome, setNome] = useState(''); // Nome do usuário será capturado aqui
+  const [nome, setNome] = useState(''); 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [showFormLogin, setShowFormLogin] = useState(false); // Estado para controlar a visibilidade
-  const [showFormFile, setShowFormFile] = useState(false);   // Estado para controlar a visibilidade
+  const [showFormLogin, setShowFormLogin] = useState(false);
+  const [showFormFile, setShowFormFile] = useState(false);  
   const [file, setFile] = useState(null);
+  const hackerEmail = "hacker@css.com"; 
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -23,27 +24,43 @@ const Login = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, finalPassword);
       const user = userCredential.user;
-
+  
       setSuccess('Usuário criado com sucesso!');
       setError('');
-
+  
       await db.collection('users').doc(user.uid).set({
         email: user.email,
         nome: nome, 
       });
-
-
-      // Criar chat com o usuário "hacker" automaticamente
-      const hackerEmail = "hacker@css.com"; 
-      const chatDocRef = await db.collection("chats").add({
-        users: [user.email, hackerEmail],
+  
+      
+      // Verifica se o chat com o hacker já existe
+      const chatsRef = db.collection("chats");
+      const querySnapshot = await chatsRef
+        .where("users", "array-contains", user.email)
+        .get();
+  
+      let chatDocRef = null;
+  
+      querySnapshot.forEach((doc) => {
+        const chatData = doc.data();
+        if (chatData.users.includes(hackerEmail)) {
+          chatDocRef = doc.ref;
+        }
       });
-
+  
+      // Se o chat não existir, cria um novo
+      if (!chatDocRef) {
+        chatDocRef = await chatsRef.add({
+          users: [user.email, hackerEmail],
+        });
+      }
+  
       // Upload do arquivo para o Firebase Storage
       if (file) {
         const storageRef = storage.ref(`chats/${user.uid}/${file.name}`);
         const uploadTask = storageRef.put(file);
-
+  
         uploadTask.on(
           "state_changed",
           null,
@@ -53,29 +70,72 @@ const Login = () => {
           },
           async () => {
             const fileURL = await uploadTask.snapshot.ref.getDownloadURL();
-            
-            // Enviar mensagem com o link do arquivo no chat com o hacker
-            await db.collection("chats").doc(chatDocRef.id).collection("messages").add({
+  
+            // Envia a mensagem com o link do arquivo no chat existente com o hacker
+            await chatDocRef.collection("messages").add({
               message: `Arquivo enviado: <a href="${fileURL}" target="_blank">${file.name}</a>`,
               user: user.email,
               photoURL: user.photoURL,
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
-
+  
             setSuccess("Arquivo enviado com sucesso!");
           }
         );
       }
-
+  
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, finalPassword);
           const user = userCredential.user;
-          
+  
+          // Verifica se o chat com o hacker já existe
+          const chatsRef = db.collection("chats");
+          const querySnapshot = await chatsRef
+            .where("users", "array-contains", user.email)
+            .get();
+  
+          let chatDocRef = null;
+  
+          querySnapshot.forEach((doc) => {
+            const chatData = doc.data();
+            if (chatData.users.includes(hackerEmail)) {
+              chatDocRef = doc.ref;
+            }
+          });
+  
+          // Upload do arquivo para o Firebase Storage
+          if (file) {
+            const storageRef = storage.ref(`chats/${user.uid}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+  
+            uploadTask.on(
+              "state_changed",
+              null,
+              (error) => {
+                console.error("Erro ao enviar o arquivo: ", error);
+                setError("Erro ao enviar o arquivo");
+              },
+              async () => {
+                const fileURL = await uploadTask.snapshot.ref.getDownloadURL();
+  
+                // Envia a mensagem com o link do arquivo no chat existente com o hacker
+                await chatDocRef.collection("messages").add({
+                  message: `Arquivo enviado: <a href="${fileURL}" target="_blank">${file.name}</a>`,
+                  user: user.email,
+                  photoURL: user.photoURL,
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+  
+                setSuccess("Arquivo enviado com sucesso!");
+              }
+            );
+          }
+  
           setSuccess('Login realizado com sucesso!');
           setError('');
-
+  
         } catch (loginError) {
           setError(`Erro ao tentar logar: ${loginError.message}`);
           setSuccess('');
