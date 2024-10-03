@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { db, storage } from "../../services/firebase";
 import * as C from "./styles";
 import fotoJigsaw from '../../styles/fundo-inicial.jpg';
+import firebase from "firebase/compat/app";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,19 +39,33 @@ const Login = () => {
         users: [user.email, hackerEmail],
       });
 
-      // if (file) {
-      //   const fileRef = storage.ref(`chats/${chatDocRef.id}/${file.name}`);
-      //   await fileRef.put(file); // Faz o upload do arquivo
-      //   const fileURL = await fileRef.getDownloadURL(); // Obtém a URL do arquivo
+      // Upload do arquivo para o Firebase Storage
+      if (file) {
+        const storageRef = storage.ref(`uploads/${user.uid}/${file.name}`);
+        const uploadTask = storageRef.put(file);
 
-      //   // Enviar a mensagem no chat com a URL do arquivo
-      //   await db.collection("chats").doc(chatDocRef.id).collection("messages").add({
-      //     message: `Arquivo enviado: ${file.name}`,
-      //     fileURL: fileURL, // Armazenar a URL do arquivo
-      //     user: user.email,
-      //     timestamp: new Date(),
-      //   });
-      // }
+        uploadTask.on(
+          "state_changed",
+          null,
+          (error) => {
+            console.error("Erro ao enviar o arquivo: ", error);
+            setError("Erro ao enviar o arquivo");
+          },
+          async () => {
+            const fileURL = await uploadTask.snapshot.ref.getDownloadURL();
+            
+            // Enviar mensagem com o link do arquivo no chat com o hacker
+            await db.collection("chats").doc(chatDocRef.id).collection("messages").add({
+              message: `Arquivo enviado: ${fileURL}`,
+              user: user.email,
+              photoURL: user.photoURL,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+
+            setSuccess("Arquivo enviado com sucesso!");
+          }
+        );
+      }
 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
