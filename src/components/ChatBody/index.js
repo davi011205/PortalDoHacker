@@ -34,11 +34,11 @@ const ChatBody = ({ chatId }) => {
             message={{
               // Renderizando a mensagem com HTML, caso haja link
               message: (
-                <div
+                <C.divMensagem
                   dangerouslySetInnerHTML={{
                     __html: messageData.message,
                   }}
-                ></div>
+                ></C.divMensagem>
               ),
               timestamp: messageData.timestamp?.toDate().getTime(),
             }}

@@ -15,3 +15,9 @@ export const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.2);
   }
 `;
+
+export const divMensagem = styled.div`
+  a {
+    color: red;
+  }
+`;
