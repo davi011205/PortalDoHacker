@@ -41,7 +41,7 @@ const Login = () => {
 
       // Upload do arquivo para o Firebase Storage
       if (file) {
-        const storageRef = storage.ref(`uploads/${user.uid}/${file.name}`);
+        const storageRef = storage.ref(`chats/${user.uid}/${file.name}`);
         const uploadTask = storageRef.put(file);
 
         uploadTask.on(
@@ -56,7 +56,7 @@ const Login = () => {
             
             // Enviar mensagem com o link do arquivo no chat com o hacker
             await db.collection("chats").doc(chatDocRef.id).collection("messages").add({
-              message: `Arquivo enviado: ${fileURL}`,
+              message: `Arquivo enviado: <a href="${fileURL}" target="_blank">${file.name}</a>`,
               user: user.email,
               photoURL: user.photoURL,
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),

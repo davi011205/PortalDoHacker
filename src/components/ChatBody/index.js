@@ -24,16 +24,27 @@ const ChatBody = ({ chatId }) => {
 
   return (
     <C.Container ref={refBody}>
-      {messagesRes?.docs.map((message) => (
-        <Message
-          key={message.id}
-          user={message.data().user}
-          message={{
-            message: message.data().message,
-            timestamp: message.data().timestamp?.toDate().getTime(),
-          }}
-        />
-      ))}
+      {messagesRes?.docs.map((message) => {
+        const messageData = message.data();
+
+        return (
+          <Message
+            key={message.id}
+            user={messageData.user}
+            message={{
+              // Renderizando a mensagem com HTML, caso haja link
+              message: (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: messageData.message,
+                  }}
+                ></div>
+              ),
+              timestamp: messageData.timestamp?.toDate().getTime(),
+            }}
+          />
+        );
+      })}
     </C.Container>
   );
 };

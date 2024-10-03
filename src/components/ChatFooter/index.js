@@ -28,14 +28,14 @@ const ChatFooter = ({ chatId }) => {
 
           // Enviar mensagem com o link do arquivo
           await db.collection("chats").doc(chatId).collection("messages").add({
-            message: `Arquivo enviado: ${fileURL}`,
+            message: `Arquivo enviado: <a href="${fileURL}" target="_blank">${file.name}</a>`,
             user: user.email,
             photoURL: user.photoURL,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           });
 
           setMessage("");
-          setFile(null); // Limpa o campo do arquivo
+          setFile('null'); // Limpa o campo do arquivo
         }
       );
     } else {
