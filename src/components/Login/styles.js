@@ -82,8 +82,8 @@ export const jigsaw = styled.img`
 `;
 
 export const p = styled.p`
-  max-width: 70vw;
-  margin: 0 auto 1vh auto;
+  max-width: 75vw;
+  margin: 0 auto 2vh auto;
   font-size: 1.2rem;
 `;
 

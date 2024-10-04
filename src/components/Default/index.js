@@ -1,7 +1,6 @@
 import React from "react";
 import * as C from "./styles";
 import { MdMessage } from "react-icons/md";
-import { BiFontSize, BiUserPlus } from "react-icons/bi";
 
 const Default = () => {
   return (
