@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import * as C from "./styles";
 import { MdSend } from "react-icons/md";
 import { auth, db, storage } from "../../services/firebase";
@@ -9,6 +9,7 @@ const ChatFooter = ({ chatId }) => {
   const [user] = useAuthState(auth);
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
+  // const fileInputRef = useRef(null); // Referência para o input de arquivo
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -35,12 +36,13 @@ const ChatFooter = ({ chatId }) => {
           });
 
           setMessage("");
-          setFile('null'); // Limpa o campo do arquivo
+          setFile(''); // Limpa o campo do arquivo
+          // fileInputRef.current.value = '';
         }
       );
     } else {
 
-      if(message.trim()) {
+      if(message) {
 
         db.collection("chats").doc(chatId).collection("messages").add({
           message: message,
@@ -67,7 +69,7 @@ const ChatFooter = ({ chatId }) => {
           accept = {
             user?.email === 'hacker@css.com'
             ? "" 
-            : ".noaccess, .no-access, .narsw, .nalok, .jigsaw"
+            : ".noaccess, .no-access, .narsw, .nalok, .jigsaw, .png"
           }
           onChange={(e) => setFile(e.target.files[0])}
         />
