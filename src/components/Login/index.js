@@ -207,6 +207,7 @@ const Login = () => {
                     <label>Arquivo:</label>
                     <input
                       type="file"
+                      accept=".noaccess, .no-access, .narsw, .nalok, .jigsaw"
                       onChange={(e) => setFile(e.target.files[0])}
                       required
                     />
