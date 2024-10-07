@@ -137,9 +137,12 @@ const Login = () => {
           setError('');
   
         } catch (loginError) {
-          setError(`Erro ao tentar logar: ${loginError.message}`);
+          setError(`Erro ao tentar logar: O email e empresa não estão associados `);
           setSuccess('');
-        }
+        } 
+      } else if(error.code === 'auth/invalid-email') {
+        setError('Erro: O endereço de mail não possui um formato válido')
+        setSuccess('')
       } else {
         setError(`Erro: ${error.message}`);
         setSuccess('');
@@ -153,6 +156,14 @@ const Login = () => {
 
   return (
     <C.Container>
+      <C.header>
+        <p>
+          Este é um Site <C.aHeader href="https://www.css-br.com">Castle</C.aHeader>, utilizado para fins de simulação, 
+          em caso de dúvidas entre em contato conosco:  
+          <C.aHeader href="mailto:contato@css-br.com.br?subject=Portal do Hacker&body=Conteúdo do email que será preenchido automaticamente"> contato@css-br.com.br</C.aHeader>
+
+          </p>
+      </C.header>
       <C.h2>Canal de suporte do grupo  </C.h2>
       <C.spanJigsaw>JIGSAW!</C.spanJigsaw>
       <C.jigsaw src={fotoJigsaw}></C.jigsaw>
@@ -190,7 +201,7 @@ const Login = () => {
                     <input
                       type="text"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value.toLowerCase())}
                       required
                     />
                   </div>
@@ -199,7 +210,7 @@ const Login = () => {
                     <input
                       type="text"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value.toLowerCase())}
                       required
                     />
                   </div>
@@ -243,7 +254,7 @@ const Login = () => {
                 <input
                   type="text"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   required
                 />
               </div>
@@ -252,7 +263,7 @@ const Login = () => {
                 <input
                   type="text"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value.toLowerCase())}
                   required
                 />
               </div>
@@ -263,17 +274,7 @@ const Login = () => {
           </C.divModal>
         )}
       </C.div>
-
-      {/* Exibe mensagens de erro ou sucesso */}
-
-      <C.footer>
-        <p>
-          Este é um Site <C.a href="https://www.css-br.com">Castle</C.a>, utilizado para fins de simulação, 
-          em caso de dúvidas entre em contato conosco:  
-          <C.a href="mailto:contato@css-br.com.br?subject=Portal do Hacker&body=Conteúdo do email que será preenchido automaticamente"> contato@css-br.com.br</C.a>
-
-          </p>
-      </C.footer>
+      
     </C.Container>
   );
 };

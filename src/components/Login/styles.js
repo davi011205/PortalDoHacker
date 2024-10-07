@@ -4,6 +4,8 @@ export const Container = styled.div`
   min-height: 100vh;
   text-align: center;
   background: black;
+  padding-top: 5vh;
+
 `;
 
 export const h2 = styled.h2`
@@ -15,6 +17,7 @@ export const h2 = styled.h2`
 export const div = styled.div`
   color: white;
   display: block;
+
 `;
 export const Button = styled.button`
   outline: none;
@@ -32,10 +35,10 @@ export const Form = styled.form`
     width: 30%;
 `
 
-export const footer = styled.footer`
-  background: rgb(23, 23, 23, 0.92);
+export const header = styled.header`
+  background: rgb(1, 1, 75);
   position: fixed;
-  bottom: 0;
+  top: 0;
   padding: 10px;
   color: white;
   width: 100vw;
@@ -68,6 +71,9 @@ export const divModalContent = styled.div`
 
 export const a = styled.a`
     color: red;
+`;
+export const aHeader = styled.a`
+    color: white;
 `;
 
 export const span = styled.span`

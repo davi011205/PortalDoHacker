@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 `;
