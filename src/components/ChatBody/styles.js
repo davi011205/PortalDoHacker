@@ -4,6 +4,7 @@ export const Container = styled.div`
   flex: 1;
   background-color: black;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 6px;
