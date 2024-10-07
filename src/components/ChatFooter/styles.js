@@ -14,6 +14,14 @@ export const Container = styled.div`
     height: 25px;
     color: #54656f;
   }
+
+   @media (min-width: 320px) and (max-width:680px) {
+      padding: 10px; 
+      svg {
+        width: 34px;
+        height: 34px;
+      }
+    }
 `;
 
 export const Form = styled.form`
@@ -43,4 +51,8 @@ export const InputFile = styled.input`
   background: #212121;
   color: white;
   box-shadow: inset 0 0 1px 1px #0003;
+
+   @media (min-width: 320px) and (max-width:680px) {
+      width: 45%;
+    }
 `;
