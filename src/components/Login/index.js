@@ -267,6 +267,7 @@ const Login = () => {
                   required
                 />
               </div>
+              <br></br>
               <C.Button onClick={handleSignup}>Entrar</C.Button>
             {error && <p style={{ color: 'red', marginTop: '3vh' }}>{error}</p>}
             {success && <p style={{ color: 'green', marginTop: '3vh' }}>{success}</p>}

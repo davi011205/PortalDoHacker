@@ -6,6 +6,9 @@ export const Container = styled.div`
   background: black;
   padding-top: 5vh;
 
+  @media (min-width: 320px) and (max-width:480px) {
+    padding-top: 7vh;
+  }
 `;
 
 export const h2 = styled.h2`
@@ -17,6 +20,7 @@ export const h2 = styled.h2`
 export const div = styled.div`
   color: white;
   display: block;
+  padding-bottom: 2vh;
 
 `;
 export const Button = styled.button`
@@ -28,11 +32,15 @@ export const Button = styled.button`
 `;
 
 export const Form = styled.form`
-    margin: 15vh auto;
+    margin: 20vh auto;
     background-color: #0f0f0f;
     padding: 20px;
     border: 1px solid #888;
     width: 30%;
+
+    @media (min-width: 320px) and (max-width:680px) {
+      width: 60%;
+    }
 `
 
 export const header = styled.header`
