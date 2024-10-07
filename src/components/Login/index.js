@@ -143,6 +143,9 @@ const Login = () => {
       } else if(error.code === 'auth/invalid-email') {
         setError('Erro: O endereço de mail não possui um formato válido')
         setSuccess('')
+      } else if(error.code === 'auth/missing-email') {
+        setError('Erro: O email é obrigatório')
+        setSuccess('')
       } else {
         setError(`Erro: ${error.message}`);
         setSuccess('');
