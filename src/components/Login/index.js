@@ -174,7 +174,7 @@ const Login = () => {
         <C.p>
           Seus sistemas e arquivos foram comprometidos? Sua empresa está inoperante? Aqui conseguiremos te ajudar!
           <br />
-          Se chegou até aqui, você já deve saber o que está acontecendo. Mas caso não saiba, temos  um breve resumo para que você se situe sobre o que é um <C.a href="https://www.kaspersky.com.br/resource-center/threats/ransomware">RANSOMWARE</C.a>.
+          Se chegou até aqui, você já deve saber o que está acontecendo. Mas caso não saiba, temos  um breve resumo para que você se situe sobre o que é um <C.a target="_blank" href="https://pt.wikipedia.org/wiki/Ransomware">RANSOMWARE</C.a>.
           <br />
           Só nós sabemos como descriptografar seus arquivos e voltar o funcionamento correto da sua empresa. Entre em contato com nosso suporte para informações sobre negociações, pagamento, garantia de devolução dos dados e maiores detalhes.
           Você também poderá submeter um arquivo comprometido para descriptografia, como amostra do nosso controle sobre os dados. <br></br>
